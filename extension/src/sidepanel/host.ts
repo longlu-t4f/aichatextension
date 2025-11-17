@@ -12,6 +12,8 @@ import {
 } from '../common/iframeBridge';
 import {
   MSG_PREFILL_REQUEST,
+  MSG_PANEL_OPENED,
+  PORT_PANEL_CLOSED,
   isExtensionMessage,
   isPrefillMessage,
   type PrefillMessage
@@ -25,9 +27,30 @@ if (!iframeEl) {
 
 const loadingEl = document.getElementById('host-loading');
 
-const searchParams = new URLSearchParams(window.location.search);
-const tabIdParam = Number(searchParams.get('tabId') ?? '');
-const currentTabId = Number.isFinite(tabIdParam) ? tabIdParam : undefined;
+// 获取当前活动标签页作为 currentTabId
+let currentTabId: number | undefined;
+
+// 通知后台面板已打开
+chrome.runtime.sendMessage({ type: MSG_PANEL_OPENED }).catch(() => {});
+
+// 创建端口连接，用于监听面板关闭
+const port = chrome.runtime.connect({ name: PORT_PANEL_CLOSED });
+
+// 获取当前活动标签页
+function updateCurrentTabId() {
+  chrome.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+    if (tabs[0]?.id) {
+      currentTabId = tabs[0].id;
+    }
+  }).catch(() => {});
+}
+
+updateCurrentTabId();
+
+// 监听标签页激活事件 - 只更新 currentTabId，不自动请求预填充
+chrome.tabs.onActivated.addListener(() => {
+  updateCurrentTabId();
+});
 
 const iframeUrl = buildIframeUrl(currentTabId);
 iframeEl.src = iframeUrl;
@@ -66,7 +89,7 @@ chrome.runtime.onMessage.addListener((rawMessage: unknown) => {
   return true;
 });
 
-requestPrefill();
+// 移除自动请求预填充，保持面板内容状态独立
 
 function handleIframeMessage(message: IframeToHostMessage) {
   switch (message.type) {
@@ -105,16 +128,16 @@ function dispatchPrefill() {
 }
 
 function isRelevantPrefill(message: PrefillMessage): boolean {
-  if (!currentTabId) return true;
-  return message.tabId == null || message.tabId === currentTabId;
+  // 全局面板接受来自任何标签页的预填充消息
+  return true;
 }
 
 function postToIframe(message: HostToIframeMessage) {
-  if (!iframeEl.contentWindow) {
+  if (!iframeEl!.contentWindow) {
     return;
   }
   const targetOrigin = iframeOrigin ?? '*';
-  iframeEl.contentWindow.postMessage(message, targetOrigin);
+  iframeEl!.contentWindow.postMessage(message, targetOrigin);
 }
 
 function requestPrefill() {

@@ -31,12 +31,14 @@ const messagesEl = $('#messages') as HTMLDivElement;
 const settingsBtn = $('#open-settings') as HTMLButtonElement;
 
 let hostOrigin: string | null = null;
-let hostReady = false;
 let sending = false;
 let pendingController: AbortController | null = null;
 
 settingsBtn?.addEventListener('click', () => {
-  emitToHost(OPEN_OPTIONS);
+  // 在插件环境中打开设置页面，独立运行时此功能不可用
+  if (isInIframe()) {
+    emitToHost(OPEN_OPTIONS);
+  }
 });
 
 sendBtn.addEventListener('click', () => {
@@ -64,12 +66,24 @@ window.addEventListener('message', (event) => {
   handleHostMessage(event.data as HostToIframeMessage);
 });
 
-emitToHost(IFRAME_READY, { source: 'remote-ui' });
+// 检测是否在 iframe 中运行
+function isInIframe(): boolean {
+  try {
+    return window.self !== window.top;
+  } catch {
+    return true;
+  }
+}
+
+// 只在 iframe 环境中通知 host
+if (isInIframe()) {
+  emitToHost(IFRAME_READY, { source: 'remote-ui' });
+}
 
 function handleHostMessage(message: HostToIframeMessage) {
   switch (message.type) {
     case HOST_READY:
-      hostReady = true;
+      // Host 已准备好，请求预填充内容
       requestPrefill();
       break;
     case PREFILL_EVENT:
@@ -81,7 +95,9 @@ function handleHostMessage(message: HostToIframeMessage) {
 }
 
 function requestPrefill() {
-  emitToHost(PREFILL_REQUEST);
+  if (isInIframe()) {
+    emitToHost(PREFILL_REQUEST);
+  }
 }
 
 async function performSend() {
@@ -90,10 +106,6 @@ async function performSend() {
   }
   const value = inputEl.value.trim();
   if (!value) {
-    return;
-  }
-  if (!hostReady) {
-    appendMessage('assistant', '扩展宿主尚未连接，请稍后重试。');
     return;
   }
 
