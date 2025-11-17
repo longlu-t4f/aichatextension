@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Chat Sidebar</title>
+    <script type="module" crossorigin src="/sidepanel/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/messaging-CgRh-b1E.js">
+    <link rel="stylesheet" crossorigin href="/index.css">
+  </head>
+  <body>
+    <div class="host-container">
+      <iframe
+        id="ai-chat-frame"
+        title="AI Chat Sidebar"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads"
+        referrerpolicy="no-referrer"
+      ></iframe>
+      <div id="host-loading" class="host-loading" aria-live="polite" role="status">
+        侧边栏加载中…
+      </div>
+    </div>
+  </body>
+  </html>
+
+

@@ -1,0 +1,1 @@
+const e="MSG_PREFILL",n="MSG_PREFILL_REQUEST";function i(t){return typeof t=="object"&&t!==null&&"type"in t&&typeof t.type=="string"}function s(t){return t.type===e}function o(t){return t.type===n}export{n as M,s as a,o as b,i};
