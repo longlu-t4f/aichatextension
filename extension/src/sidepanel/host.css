@@ -24,22 +24,3 @@ body {
   display: block;
   background-color: #0f172a;
 }
-
-.host-loading {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle at top, rgba(79, 70, 229, 0.12), rgba(15, 23, 42, 0.9));
-  color: #e0e7ff;
-  font-size: 14px;
-  letter-spacing: 0.05em;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.host-loading.hidden {
-  opacity: 0;
-}
-

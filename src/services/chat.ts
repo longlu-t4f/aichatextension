@@ -1,8 +1,23 @@
+// 获取运行时配置（优先级：window.APP_CONFIG > import.meta.env > 默认值）
+function getRuntimeConfig(key: string): string | undefined {
+  if (typeof window !== 'undefined' && (window as any).APP_CONFIG) {
+    return (window as any).APP_CONFIG[key];
+  }
+  return undefined;
+}
+
 const API_BASE_URL =
+  getRuntimeConfig('VITE_CHAT_API_BASE_URL')?.replace(/\/$/, '') ||
   (import.meta.env.VITE_CHAT_API_BASE_URL as string | undefined)?.replace(/\/$/, '') ||
   'https://api.openai.com';
-const API_KEY = (import.meta.env.VITE_CHAT_API_KEY as string | undefined) || '';
-const DEFAULT_MODEL = (import.meta.env.VITE_CHAT_MODEL as string | undefined) || 'gpt-4o-mini';
+const API_KEY =
+  getRuntimeConfig('VITE_CHAT_API_KEY') ||
+  (import.meta.env.VITE_CHAT_API_KEY as string | undefined) ||
+  '';
+const DEFAULT_MODEL =
+  getRuntimeConfig('VITE_CHAT_MODEL') ||
+  (import.meta.env.VITE_CHAT_MODEL as string | undefined) ||
+  'gpt-4o-mini';
 
 type RequestOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';

@@ -25,8 +25,6 @@ if (!iframeEl) {
   throw new Error('缺少 iframe 容器，无法初始化侧边栏宿主。');
 }
 
-const loadingEl = document.getElementById('host-loading');
-
 // 获取当前活动标签页作为 currentTabId
 let currentTabId: number | undefined;
 
@@ -95,7 +93,6 @@ function handleIframeMessage(message: IframeToHostMessage) {
   switch (message.type) {
     case IFRAME_READY:
       bridgeReady = true;
-      hideLoading();
       postToIframe({
         channel: BRIDGE_CHANNEL,
         type: HOST_READY,
@@ -144,10 +141,6 @@ function requestPrefill() {
   chrome.runtime
     .sendMessage({ type: MSG_PREFILL_REQUEST, tabId: currentTabId })
     .catch(() => undefined);
-}
-
-function hideLoading() {
-  loadingEl?.classList.add('hidden');
 }
 
 function safeGetOrigin(url: string | undefined): string | undefined {

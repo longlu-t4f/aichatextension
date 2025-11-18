@@ -76,7 +76,21 @@ function ensureBubble() {
   if (bubbleEl) return bubbleEl;
   bubbleEl = document.createElement('div');
   bubbleEl.className = 'ai-chat-sidebar-bubble';
-  bubbleEl.textContent = 'AI 回复';
+  
+  // 创建图片元素
+  const img = document.createElement('img');
+  img.src = chrome.runtime.getURL('content/logo.png');
+  img.alt = 'AI';
+  img.className = 'ai-chat-sidebar-bubble-icon';
+  
+  // 创建文案元素
+  const text = document.createElement('span');
+  text.textContent = 'AI 建议回复';
+  text.className = 'ai-chat-sidebar-bubble-text';
+  
+  bubbleEl.appendChild(img);
+  bubbleEl.appendChild(text);
+  
   bubbleEl.addEventListener('mousedown', (e) => {
     e.preventDefault();
     e.stopPropagation();

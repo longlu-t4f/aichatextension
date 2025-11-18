@@ -1,11 +1,11 @@
 .ai-chat-sidebar-bubble {
   position: fixed;
   z-index: 2147483647;
-  padding: 10px 12px;
-  background: #111827;
-  color: #fff;
+  padding: 8px 12px;
+  background: #ffffff;
+  color: #333333;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   font-size: 14px;
   line-height: 1;
   cursor: pointer;
@@ -14,6 +14,21 @@
   pointer-events: none;
   transition: opacity 0.2s ease;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #e5e5e5;
+}
+
+.ai-chat-sidebar-bubble-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.ai-chat-sidebar-bubble-text {
+  white-space: nowrap;
 }
 
 

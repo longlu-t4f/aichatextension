@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  ai-chat-sidebar:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-chat-sidebar
+    ports:
+      - "${PORT:-4173}:4173"
+    environment:
+      # 服务器端口配置
+      - PORT=${PORT:-4173}
+      
+      # API 配置
+      - API_HOST=${API_HOST:-}
+      - API_PREFIX=${API_PREFIX:-/api}
+      - VITE_API_PREFIX=${VITE_API_PREFIX:-}
+      
+      # Chat API 配置
+      - VITE_CHAT_API_BASE_URL=${VITE_CHAT_API_BASE_URL:-https://api.openai.com}
+      - VITE_CHAT_API_KEY=${VITE_CHAT_API_KEY:-}
+      - VITE_CHAT_MODEL=${VITE_CHAT_MODEL:-gpt-4o-mini}
+    restart: unless-stopped
+    networks:
+      - ai-chat-network
+
+networks:
+  ai-chat-network:
+    driver: bridge
+

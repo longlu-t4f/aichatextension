@@ -1,6 +1,6 @@
 const DEFAULT_IFRAME_URL =
   (import.meta.env.VITE_IFRAME_URL as string | undefined)?.trim() ||
-  'http://localhost:5173/';
+  'http://172.20.62.7:5173/';
 
 const envAllowed =
   (import.meta.env.VITE_IFRAME_ALLOWED_ORIGINS as string | undefined)

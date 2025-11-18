@@ -6,42 +6,8 @@
     <title>AI Chat Sidebar UI</title>
   </head>
   <body>
-    <div id="app" class="sp-container">
-      <header class="sp-header">
-        <div class="logo">AI Chat</div>
-        <nav class="sp-nav">
-          <button id="open-settings" class="settings-button" type="button" aria-label="打开设置" title="设置">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z"
-              />
-              <path
-                d="M20.25 12a8.26 8.26 0 0 0-.08-1.17l1.9-1.49a.75.75 0 0 0 .18-.96l-1.8-3.12a.75.75 0 0 0-.9-.34l-2.24.9a7.87 7.87 0 0 0-2.02-1.17l-.34-2.39A.75.75 0 0 0 13.27 2h-3.54a.75.75 0 0 0-.74.64l-.34 2.39a7.87 7.87 0 0 0-2.02 1.17l-2.24-.9a.75.75 0 0 0-.9.34l-1.8 3.12a.75.75 0 0 0 .18.96l1.9 1.49a8.26 8.26 0 0 0 0 2.34l-1.9 1.49a.75.75 0 0 0-.18.96l1.8 3.12a.75.75 0 0 0 .9.34l2.24-.9c.61.48 1.29.87 2.02 1.17l.34 2.39c.05.36.36.64.74.64h3.54c.38 0 .69-.28.74-.64l.34-2.39c.73-.3 1.41-.69 2.02-1.17l2.24.9a.75.75 0 0 0 .9-.34l1.8-3.12a.75.75 0 0 0-.18-.96l-1.9-1.49c.05-.39.08-.78.08-1.17Z"
-              />
-            </svg>
-          </button>
-        </nav>
-      </header>
-      <main class="sp-main">
-        <section class="chat-area" aria-label="聊天对话">
-          <div id="messages" class="messages" aria-live="polite"></div>
-        </section>
-        <section class="composer" aria-label="消息输入">
-          <label for="input" class="sr-only">输入消息</label>
-          <textarea
-            id="input"
-            rows="4"
-            placeholder="在此输入消息，或等待页面选中文本注入…"
-            autocomplete="off"
-          ></textarea>
-          <div class="composer-toolbar">
-            <div class="composer-tools"></div>
-            <button id="send" class="primary" type="button">发送</button>
-          </div>
-        </section>
-      </main>
-    </div>
-    <script type="module" src="/src/main.ts"></script>
+    <div id="app"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
 

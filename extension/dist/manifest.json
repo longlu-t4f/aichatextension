@@ -42,6 +42,17 @@
       "run_at": "document_idle"
     }
   ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content/logo.png"
+      ],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ]
+    }
+  ],
   "options_page": "src/options/index.html"
 }
 

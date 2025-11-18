@@ -259,3 +259,154 @@ body {
   box-shadow: none;
 }
 
+/* 登录页面样式 */
+.login-container,
+.loading-container,
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.login-content,
+.loading-content,
+.error-content {
+  background: white;
+  border-radius: 16px;
+  padding: 60px 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-icon,
+.error-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  color: #4f46e5;
+}
+
+.error-icon {
+  color: #ff7875;
+}
+
+.login-title,
+.error-title {
+  margin: 0 0 16px 0;
+  color: #262626;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.login-description {
+  margin: 0 0 32px 0;
+  color: #8c8c8c;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.login-button {
+  background: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  width: 100%;
+}
+
+.login-button:hover:not(:disabled) {
+  background: #40a9ff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(24, 144, 255, 0.3);
+}
+
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-error {
+  margin-top: 16px;
+  padding: 12px;
+  background: #fff2f0;
+  border: 1px solid #ffccc7;
+  border-radius: 8px;
+  color: #cf1322;
+  font-size: 14px;
+}
+
+/* 加载动画 */
+.loading-spinner {
+  margin-bottom: 24px;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+  border: 4px solid #f3f4f6;
+  border-top-color: #4f46e5;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  margin: 0;
+  color: #8c8c8c;
+  font-size: 16px;
+}
+
+.error-message {
+  margin: 0 0 32px 0;
+  color: #8c8c8c;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.error-button {
+  background: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.error-button:hover {
+  background: #40a9ff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(24, 144, 255, 0.3);
+}
+
+.error-button svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+}
+
